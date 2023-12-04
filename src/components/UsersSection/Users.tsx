@@ -4,25 +4,27 @@ import Container from "../Container/Container";
 import {useInfiniteQuery} from "react-query";
 import {getUsers} from "../../APIs/usersAPI";
 import styles from './Users.module.scss'
-import {User} from "../../types/Users";
+import {ApiResponse, User} from "../../types/Users";
 import Button from "../UIKit/Button/Button";
 
 const Users = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery(
     'users',
-    ({ pageParam = 1 }) => getUsers(pageParam),
+    ({ pageParam = 1 }) => getUsers({page: pageParam}),
     {
-      getNextPageParam: (lastPage) => {
-        console.log('lastPage', lastPage);
-        const url = new URL(lastPage.links.next_url);
-        const nextPage = url.searchParams.get('page');
-        return nextPage ? Number(nextPage) : undefined;
+      getNextPageParam: (lastPage: ApiResponse) => {
+        if (lastPage.links && lastPage.links.next_url) {
+          const url = new URL(lastPage.links.next_url);
+          const nextPage = url.searchParams.get('page');
+          return nextPage ? Number(nextPage) : undefined;
+        } else {
+          return undefined;
+        }
       }
     }
   );
 
-  console.log('data', data)
-
+  const totalUsers = data?.pages[0]?.total_users;
   return (
     <section className={styles.wrapper}>
       <Container className={styles.users}>
@@ -36,7 +38,7 @@ const Users = () => {
             </Fragment>
           ))}
         </div>
-        {hasNextPage && (
+        {(totalUsers && totalUsers > 6) && hasNextPage && (
           <Button variant= 'yellow' onClick={() => fetchNextPage()} disabled={isFetchingNextPage}>
             Show more
           </Button>

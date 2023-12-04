@@ -16,3 +16,16 @@ export interface UserCardProps{
   photo: string,
   position: string,
 }
+
+export interface ApiResponse {
+  success: boolean;
+  total_pages: number;
+  total_users: number;
+  count: number;
+  page: number;
+  links: {
+    next_url: string | null;
+    prev_url: string | null;
+  };
+  users: User[];
+}
