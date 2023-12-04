@@ -1,0 +1,53 @@
+@import '../../../../styles/utils/variables';
+@import '../../../../styles/utils/mixin';
+
+
+.fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+
+  & legend {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    margin-bottom: 11px;
+  }
+
+  & label {
+    display: flex;
+    gap: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    position: relative;
+
+    & input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+
+    }
+
+    & .radioButton {
+      width: 20px;
+      height: 20px;
+
+
+      &:after {
+        content: url("../../../../assets/images/input/radio-empty.svg");
+        position: absolute;
+      }
+    }
+
+    & input:checked ~ .radioButton{
+      content: url("../../../../assets/images/input/radio-checked.svg");
+    }
+  }
+
+
+}

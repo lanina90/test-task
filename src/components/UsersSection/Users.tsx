@@ -1,11 +1,11 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment} from 'react';
 import UserCard from "./UserCard/UserCard";
 import Container from "../Container/Container";
 import {useInfiniteQuery} from "react-query";
 import {getUsers} from "../../APIs/usersAPI";
-import styles from './Users.module.scss'
 import {ApiResponse, User} from "../../types/Users";
 import Button from "../UIKit/Button/Button";
+import styles from './Users.module.scss'
 
 const Users = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery(

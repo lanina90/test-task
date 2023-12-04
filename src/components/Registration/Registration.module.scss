@@ -1,0 +1,26 @@
+@import '../../styles/utils/mixin';
+
+.registration{
+  background: $bg-color;
+
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 328px;
+    padding-bottom: 100px;
+
+
+    @include breakpoint(tablet) {
+      width: 704px;
+    }
+
+    @include breakpoint(laptop) {
+      width: 904px;
+    }
+
+    @include breakpoint(desktop) {
+      width: 1170px;
+    }
+  }
+}
