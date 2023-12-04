@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './RegistrationFrom.module.scss';
 import Button from "../../UIKit/Button/Button";
 import {Form, Formik} from "formik";
@@ -10,46 +10,74 @@ import {
   photoValidationSchema, positionValidationSchema, phoneValidationSchema
 } from "../../../utils/validation/validationSchema";
 import SelectPosition from "./SelectPosition/SelectPosition";
+import ImageInput from "./ImageInput/ImageInput";
+import {postUser} from "../../../APIs/usersAPI";
+import Success from "../Success/Success";
+
+
 
 const RegistrationForm = () => {
+  const [success, setSuccess] = useState(false)
+  const [errors, setErrors] = useState<string | null>("")
 
   const validationSchema = object({
     email: emailValidationSchema,
-    userName: nameValidationSchema,
+    name: nameValidationSchema,
     phone: phoneValidationSchema,
-    position: positionValidationSchema,
-    // photo: photoValidationSchema,
+    position_id: positionValidationSchema,
+    photo: photoValidationSchema,
   });
 
   return (
+    <>
       <Formik
         initialValues={{
-          userName: "",
+          name: "",
           email: "",
           phone: "",
-          position: "",
+          position_id: 1,
           photo: ""
         }}
-        onSubmit={(values) => {
-          console.log(values)
+        onSubmit={ async (values, {resetForm}) => {
+          try{
+            const {phone, ...rest} = values;
+            const cleanedPhoneNumber = phone.replace(/\D/g, '');
+            const formattedPhoneNumber = `+${cleanedPhoneNumber}`;
+            const dataValues = {
+              phone: formattedPhoneNumber,
+              ...rest
+            }
+            const response = await postUser(dataValues);
+            console.log("error", response);
+
+            if (response.success) {
+              setSuccess(true)
+              resetForm();
+            } else {
+              setErrors(response.message)
+            }
+
+          } catch (e: any) {
+           setErrors(e.message)
+          }
         }}
         validationSchema={validationSchema}
         validateOnChange={true}
         validateOnBlur={true}>
-        {({values, handleBlur, handleChange, errors, touched, isValid}) => {
+        {({values, setFieldTouched, setFieldValue, handleBlur, handleChange, errors, touched, isValid}) => {
           return (
             <Form className={styles.registration}>
               <div className={styles.form}>
                 <div className={styles.inputs}>
                   <Input
-                    name={"userName"}
-                    id={"userName"}
-                    value={values.userName}
+                    name={"name"}
+                    id={"name"}
+                    value={values.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     label={'Your name'}
                     error={
-                      errors.userName && touched.userName ? errors.userName : undefined
+                      errors.name && touched.name ? errors.name : undefined
                     }
                   />
                   <Input
@@ -77,13 +105,29 @@ const RegistrationForm = () => {
                   />
                 </div>
                 <SelectPosition/>
+                <ImageInput
+                  onChange={(photo) => {
+                    setFieldValue("photo", photo).then(() => setFieldTouched("photo", true))
+                  }}
+                  error={errors.photo ? errors.photo : undefined}
+                />
               </div>
-              <Button type="submit" variant='yellow'>Sign up</Button>
-
+              <Button type="submit" variant='yellow'
+                      disabled={!isValid || (
+                        !touched.email &&
+                        !touched.name &&
+                        !touched.position_id &&
+                        !touched.phone
+                      )}
+              >Sign up</Button>
             </Form>
           )
         }}
       </Formik>
+      {success && <Success/>}
+      {errors && <span style={{color: "red"}}>{errors}</span>}
+    </>
+
 
   );
 };

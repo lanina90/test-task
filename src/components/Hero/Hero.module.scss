@@ -42,10 +42,9 @@
   }
 
   @include breakpoint(laptop) {
-    padding: 164px 322px 163px 322px;
+    padding: 89px 194px 88px 194px;
     background-image: url("../../assets/images/hero/field-1024.jpeg");
-    height: 650px;
-    width: 1170px;
+    width: 1024px;
     margin: auto;
 
     .wrapper{
@@ -53,4 +52,17 @@
     }
 
   }
+
+@include breakpoint(desktop) {
+  padding: 164px 322px 163px 322px;
+  width: 1170px;
+  height: 650px;
+  background-image: url("../../assets/images/hero/field-2560.jpeg");
+  margin: auto;
+
+  .wrapper{
+    width: 380px;
+  }
+
+}
 }

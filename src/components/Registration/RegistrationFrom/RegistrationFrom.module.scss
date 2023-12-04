@@ -19,11 +19,17 @@
     flex-direction: column;
     gap: 25px;
 
+
     .inputs{
       display: flex;
       flex-direction: column;
       gap: 50px;
     }
+  }
+
+  @include breakpoint(tablet) {
+    width: 380px;
+
   }
 
 }

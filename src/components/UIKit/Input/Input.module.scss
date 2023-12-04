@@ -4,7 +4,6 @@
 
 .wrapper {
 
-
   .input {
     position: relative;
 
@@ -72,4 +71,33 @@
     color: $error;
   }
 
+
+  @include breakpoint(tablet) {
+
+
+    .input {
+
+      &__field {
+        width: 380px;
+
+        &.error{
+          border: 2px solid var(--error, #CB3D40);
+        }
+
+        &:focus,
+        &:not(:placeholder-shown) {
+          outline: none;
+
+          & + .input__label {
+            transform: translate(-6px, -150%) scale(0.75);
+            background: #F8F8F8;
+            font-weight: 500;
+            line-height: 14px;
+            z-index: 6;
+            padding: 0 4px;
+          }
+        }
+      }
+    }
+  }
 }
