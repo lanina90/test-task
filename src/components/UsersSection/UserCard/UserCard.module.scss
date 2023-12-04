@@ -1,0 +1,46 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/mixin';
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 328px;
+  height: 254px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: #FFF;
+  padding: 20px;
+  color: $black;
+  text-align: center;
+
+
+  & img {
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+  }
+
+  & p {
+    width: 288px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  @include breakpoint(tablet) {
+    width: 344px;
+
+  }
+
+  @include breakpoint(laptop) {
+    width: 282px;
+  }
+
+  @include breakpoint(desktop) {
+    width: 370px;
+  }
+
+}

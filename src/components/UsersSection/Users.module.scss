@@ -1,0 +1,57 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/mixin';
+
+.wrapper {
+  background: rgba(248, 248, 248, 1);
+
+  .users {
+    padding: 140px 0;
+    width: 328px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    margin: auto;
+    align-items: center;
+
+    .userList{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    & button{
+      width: 120px;
+    }
+  }
+
+
+  @include breakpoint(tablet) {
+   .users{
+     width: 704px;
+
+     .userList{
+       flex-direction: row;
+       flex-wrap: wrap;
+       gap: 16px;
+     }
+   }
+  }
+
+  @include breakpoint(laptop) {
+    .users{
+      width: 904px;
+
+      .userList{
+        gap: 29px;
+      }
+    }
+  }
+
+  @include breakpoint(desktop) {
+    .users{
+      width: 1168px;
+
+    }
+  }
+}
