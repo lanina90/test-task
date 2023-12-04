@@ -29,6 +29,10 @@
   }
 
   @include breakpoint(laptop) {
+    padding: 17px 60px;
+  }
+
+  @include breakpoint(desktop) {
     padding: 17px 0;
   }
 }

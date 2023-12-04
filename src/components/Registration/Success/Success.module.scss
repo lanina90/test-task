@@ -1,0 +1,20 @@
+@import "../../../styles/utils/mixin";
+
+
+.success{
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+
+ .image{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+ }
+
+  @include breakpoint(tablet){
+    width: 504px;
+  }
+}
