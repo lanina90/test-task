@@ -1,0 +1,75 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/mixin';
+
+
+.wrapper {
+
+
+  .input {
+    position: relative;
+
+
+    &__label {
+      position: absolute;
+      left: 16px;
+      top: 0;
+      transform: translate(0, 0);
+      transform-origin: 0 0;
+      transition: transform 120ms ease-in;
+      line-height: 26px;
+      color: #7E7E7E;
+
+      &.error{
+        color: $error;
+      }
+    }
+
+    &__field {
+      width: 328px;
+      height: 54px;
+      border-radius: 4px;
+      border: 1px solid #D0CFCF;
+      background: transparent;
+      padding: 14px 16px;
+      color: rgba(0, 0, 0, 0.87);
+      line-height: 26px;
+
+      &.error{
+        border: 2px solid var(--error, #CB3D40);
+      }
+
+      &:focus,
+      &:not(:placeholder-shown) {
+        outline: none;
+
+        & + .input__label {
+          transform: translate(-6px, -150%) scale(0.75);
+          background: #F8F8F8;
+          font-weight: 500;
+          line-height: 14px;
+          z-index: 6;
+          padding: 0 4px;
+        }
+      }
+    }
+  }
+
+  .helperText, .errorText{
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 14px;
+    margin-left: 16px;
+    margin-top: 4px;
+  }
+
+  .helperText{
+    color: #7E7E7E;
+  }
+
+  .errorText{
+    color: $error;
+  }
+
+}

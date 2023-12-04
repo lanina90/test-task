@@ -4,6 +4,7 @@ import Hero from "./components/Hero/Hero";
 import Users from "./components/UsersSection/Users";
 
 import './App.scss';
+import Registration from "./components/Registration/Registration";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Header/>
       <Hero/>
       <Users/>
+      <Registration/>
     </>
   );
 }
