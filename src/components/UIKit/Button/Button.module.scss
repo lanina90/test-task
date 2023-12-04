@@ -1,0 +1,23 @@
+@import '../../../styles/utils/variables';
+
+
+.yellowBtn {
+  height: 34px;
+  border-radius: 80px;
+  background: $primary;
+  color: $black;
+  font-size: 16px;
+  line-height: 26px;
+
+  &:hover{
+    background: #FFE302;
+
+  }
+
+}
+
+.disabled{
+  background: rgba(180, 180, 180, 1);
+  color: rgba(255, 255, 255, 0.87);
+  pointer-events: none;
+}

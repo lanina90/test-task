@@ -1,0 +1,17 @@
+@import './variables', './func';
+
+@mixin breakpoint($from, $to: false) {
+  @if not $to {
+    @media screen and (min-width: getBreakpoint($from)) {
+      @content;
+    }
+  } @else if not $from {
+    @media screen and (max-width: (getBreakpoint($to) - 1px)) {
+      @content;
+    }
+  } @else {
+    @media screen and (min-width: getBreakpoint($from)) and (max-width: (getBreakpoint($to) - 1px)) {
+      @content;
+    }
+  }
+}

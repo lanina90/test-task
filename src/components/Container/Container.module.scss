@@ -1,0 +1,21 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/func';
+@import '../../styles/utils/mixin';
+
+:where(.container) {
+  max-width: getBreakpoint(mobile);
+  height: 100%;
+  margin: 0 auto;
+
+  @include breakpoint(tablet) {
+    max-width: getBreakpoint(tablet);
+  }
+
+  @include breakpoint(laptop) {
+    max-width: getBreakpoint(laptop);
+  }
+
+  @include breakpoint(desktop) {
+    max-width: getBreakpoint(1170px);
+  }
+}

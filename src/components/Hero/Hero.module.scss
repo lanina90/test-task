@@ -1,0 +1,56 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/func';
+@import '../../styles/utils/mixin';
+
+.hero{
+  padding: 40px 16px 71px 16px;
+  height: 500px;
+  background-image: url("../../assets/images/hero/field-360.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    color: #FFF;
+    text-align: center;
+    width: 328px;
+
+    .info{
+      display: flex;
+      flex-direction: column;
+      gap: 21px;
+    }
+
+    & button{
+      width: 100px;
+      align-self: center;
+      height: 34px;
+      flex-shrink: 0;
+    }
+  }
+
+  @include breakpoint(tablet) {
+    padding: 89px 194px 88px 194px;
+    background-image: url("../../assets/images/hero/field-768.jpeg");
+
+    .wrapper{
+      width: 380px;
+    }
+
+  }
+
+  @include breakpoint(laptop) {
+    padding: 164px 322px 163px 322px;
+    background-image: url("../../assets/images/hero/field-1024.jpeg");
+    height: 650px;
+    width: 1170px;
+    margin: auto;
+
+    .wrapper{
+      width: 380px;
+    }
+
+  }
+}

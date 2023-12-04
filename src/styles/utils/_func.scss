@@ -1,0 +1,14 @@
+@import './variables';
+
+/// Get breakpoint value by name or px.
+/// $value - breakpoint variable or custom value.
+/// @return {number} - {number}px
+
+@function getBreakpoint($value) {
+  @if not map-has-key($breakpoints, $value) {
+    @return $value;
+  }
+
+  @return map-get($breakpoints, $value);
+}
+
