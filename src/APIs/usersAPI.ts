@@ -48,11 +48,11 @@ export const postUser = async (userData: UserData) => {
       return { success: true };
     } else {
       const responseData = response.data;
-      const message = responseData.message || 'Помилка при відправці';
+      const message = responseData.message || 'Sending error';
       return { success: false, message };
     }
   } catch (e: any) {
-    const errorMessage = e.response?.data?.message || 'Невідома помилка';
+    const errorMessage = e.response?.data?.message || 'Unknown error';
     return { success: false, message: errorMessage };
   }
 };
