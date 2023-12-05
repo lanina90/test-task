@@ -24,7 +24,7 @@ const Users = () => {
       }
     }
   );
-
+  console.log(data);
   const totalUsers = data?.pages[0]?.total_users;
   return (
     <section className={styles.wrapper}>
@@ -35,9 +35,11 @@ const Users = () => {
           <div className={styles.userList}>
             {data?.pages.map((page, index) => (
               <Fragment key={index}>
-                {page.users.map((user: User) => (
-                  <UserCard key={user.id} photo={user.photo} name={user.name} email={user.email} position={user.position} phone={user.phone}/>
-                ))}
+                {page.users
+                  .sort((a, b) => b.registration_timestamp - a.registration_timestamp)
+                  .map((user: User) => (
+                    <UserCard key={user.id} photo={user.photo} name={user.name} email={user.email} position={user.position} phone={user.phone} />
+                  ))}
               </Fragment>
             ))}
           </div>}
