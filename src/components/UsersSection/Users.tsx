@@ -1,14 +1,15 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import UserCard from "./UserCard/UserCard";
 import Container from "../Container/Container";
-import {useInfiniteQuery} from "react-query";
+import {useInfiniteQuery, useQueryClient} from "react-query";
 import {getUsers} from "../../APIs/usersAPI";
 import {ApiResponse, User} from "../../types/Users";
 import Button from "../UIKit/Button/Button";
 import {ReactComponent as Loader} from "../../assets/images/loader/loader.svg";
 import styles from './Users.module.scss'
 
-const Users = () => {
+const Users = ({collapsePages, setCollapsePages} : {collapsePages: boolean, setCollapsePages:  React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const queryClient = useQueryClient();
   const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery(
     'users',
     ({ pageParam = 1 }) => getUsers({page: pageParam}),
@@ -24,8 +25,19 @@ const Users = () => {
       }
     }
   );
-  console.log(data);
+
+  useEffect(() => {
+    if (collapsePages) {
+      queryClient.removeQueries('users', { exact: true });
+      fetchNextPage({ pageParam: 1 });
+      setCollapsePages(false)
+    }
+  }, [collapsePages, queryClient, fetchNextPage]);
+
   const totalUsers = data?.pages[0]?.total_users;
+
+  const usersToShow = collapsePages ? (data?.pages[0] ? [data.pages[0]] : []) : data?.pages;
+
   return (
     <section className={styles.wrapper}>
         <Container className={styles.users}>
@@ -33,7 +45,7 @@ const Users = () => {
           {isLoading ? <Loader/>
             :
           <div className={styles.userList}>
-            {data?.pages.map((page, index) => (
+            {usersToShow?.map((page, index) => (
               <Fragment key={index}>
                 {page.users
                   .sort((a, b) => b.registration_timestamp - a.registration_timestamp)

@@ -13,10 +13,12 @@ import SelectPosition from "./SelectPosition/SelectPosition";
 import ImageInput from "./ImageInput/ImageInput";
 import {postUser} from "../../../APIs/usersAPI";
 import Success from "../Success/Success";
+import {useMutation, useQueryClient} from "react-query";
 
 
 
-const RegistrationForm = () => {
+const RegistrationForm = ({setCollapsePages} : {setCollapsePages:  React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const queryClient = useQueryClient();
   const [success, setSuccess] = useState(false)
   const [errors, setErrors] = useState<string | null>("")
 
@@ -26,6 +28,17 @@ const RegistrationForm = () => {
     phone: phoneValidationSchema,
     position_id: positionValidationSchema,
     photo: photoValidationSchema,
+  });
+
+  const createUser = useMutation(postUser, {
+    onSuccess: () => {
+      setSuccess(true);
+      queryClient.invalidateQueries('users');
+      setCollapsePages(true)
+    },
+    onError: (error: Error) => {
+      setErrors(error.message);
+    },
   });
 
   return (
@@ -47,16 +60,8 @@ const RegistrationForm = () => {
               phone: formattedPhoneNumber,
               ...rest
             }
-            const response = await postUser(dataValues);
-            console.log("error", response);
-
-            if (response.success) {
-              setSuccess(true)
-              resetForm();
-            } else {
-              setErrors(response.message)
-            }
-
+            await createUser.mutateAsync(dataValues);
+            resetForm();
           } catch (e: any) {
            setErrors(e.message)
           }
