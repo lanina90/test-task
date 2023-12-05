@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
-import Header from "./components/layout/Header/Header";
-import Hero from "./components/Hero/Hero";
-import Users from "./components/UsersSection/Users";
-
+import { lazy } from 'react';
 import './App.scss';
-import Registration from "./components/Registration/Registration";
+const Header = lazy(() => import('./components/layout/Header/Header'));
+const Hero = lazy(() => import('./components/Hero/Hero'));
+const Users = lazy(() => import('./components/UsersSection/Users'));
+const Registration = lazy(() => import('./components/Registration/Registration'));
+
+
 
 function App() {
   const [collapsePages, setCollapsePages] = useState(false);
