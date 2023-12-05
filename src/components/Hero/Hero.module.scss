@@ -5,7 +5,7 @@
 .hero{
   padding: 40px 16px 71px 16px;
   height: 500px;
-  background-image: url("../../assets/images/hero/field-360.jpeg");
+  background-image: url("../../assets/images/hero/field-360.webp");
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -33,7 +33,7 @@
 
   @include breakpoint(tablet) {
     padding: 89px 194px 88px 194px;
-    background-image: url("../../assets/images/hero/field-768.jpeg");
+    background-image: url("../../assets/images/hero/field-768.webp");
 
     .wrapper{
       width: 380px;
@@ -43,7 +43,7 @@
 
   @include breakpoint(laptop) {
     padding: 89px 194px 88px 194px;
-    background-image: url("../../assets/images/hero/field-1024.jpeg");
+    background-image: url("../../assets/images/hero/field-1024.webp");
     width: 1024px;
     margin: auto;
 
@@ -57,7 +57,7 @@
   padding: 164px 322px 163px 322px;
   width: 1170px;
   height: 650px;
-  background-image: url("../../assets/images/hero/field-2560.jpeg");
+  background-image: url("../../assets/images/hero/field-2560.webp");
   margin: auto;
 
   .wrapper{
