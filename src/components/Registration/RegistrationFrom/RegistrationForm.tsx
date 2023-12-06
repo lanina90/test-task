@@ -14,6 +14,7 @@ import ImageInput from "./ImageInput/ImageInput";
 import {postUser} from "../../../APIs/usersAPI";
 import Success from "../Success/Success";
 import {useMutation, useQueryClient} from "react-query";
+import {formatNumberValue} from "../../../utils/functions/formatPhoneNumber";
 
 
 
@@ -102,7 +103,10 @@ const RegistrationForm = ({setCollapsePages} : {setCollapsePages:  React.Dispatc
                     label={"Phone"}
                     value={values.phone}
                     text={"+38 (XXX) XXX - XX - XX"}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      e.target.value = formatNumberValue(e.target.value);
+                      handleChange(e);
+                    }}
                     onBlur={handleBlur}
                     error={
                       errors.phone && touched.phone ? errors.phone : undefined
